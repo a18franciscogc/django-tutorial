@@ -1,0 +1,12 @@
+[Unit]
+Description=uwsgi para Django-tutorilal
+
+[Service]
+Type=simple
+User=usuario
+ExecStart=/usr/bin/uwsgi /home/usuario/django-tutorial/include/uwsgi.ini
+KillMode=mixed
+
+[Install]
+WantedBy=multi-user.target
+
