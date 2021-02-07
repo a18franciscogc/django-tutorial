@@ -1,11 +1,26 @@
 [Unit]
 Description=uwsgi para Django-tutorilal
 
+# Requirements
+Requires=network.target
+
+# Dependency ordering
+After=network.target
+
 [Service]
-Type=simple
-User=usuario
-ExecStart=/usr/bin/uwsgi /home/usuario/django-tutorial/include/uwsgi.ini
-KillMode=mixed
+
+TimeoutStartSec=0
+RestartSec=10
+Restart=always
+
+# path to app
+WorkingDirectory=/home/usuario/django-tutorial
+
+KillSignal=SIGQUIT
+Type=notify
+NotifyAccess=all
+
+ExecStart=/usr/bin/uwsgi --ini /home/usuario/django-tutorial/include/uwsgi.ini
 
 [Install]
 WantedBy=multi-user.target
